@@ -1,22 +1,25 @@
 <ng-container *ngIf="state$ | async as state">
 
-    <!-- Spinner de carga -->
-    <div *ngIf="state.loading" class="loading-container">
-        <mat-spinner></mat-spinner>
+    <div *ngIf="state.error" class="error-container">
+        <h2>¡Ups!</h2>
+        <p>{{ state.error }}</p>
     </div>
 
-    <div class="dashboard-container" *ngIf="!state.loading">
-        <div style="text-align: right; padding: 1rem;">
+    <div class="dashboard-container" *ngIf="!state.error">
+        
+        <div class="header-actions">
             <button mat-button color="warn" (click)="logout()">Cerrar Sesión</button>
         </div>
-        <!-- Sección de Análisis de Datos -->
+
         <div class="metrics-row">
+
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Promedio de Edad</mat-card-title>
                 </mat-card-header>
-                <mat-card-content>
-                    <h2>{{ state.averageAge }} años</h2>
+                <mat-card-content class="card-content-center">
+                    <mat-spinner *ngIf="state.loading" diameter="30"></mat-spinner>
+                    <h2 *ngIf="!state.loading">{{ state.averageAge }} años</h2>
                 </mat-card-content>
             </mat-card>
 
@@ -24,24 +27,27 @@
                 <mat-card-header>
                     <mat-card-title>Desviación Estándar</mat-card-title>
                 </mat-card-header>
-                <mat-card-content>
-                    <h2>{{ state.standardDeviation }}</h2>
+                <mat-card-content class="card-content-center">
+                    <mat-spinner *ngIf="state.loading" diameter="30"></mat-spinner>
+                    <h2 *ngIf="!state.loading">{{ state.standardDeviation }}</h2>
                 </mat-card-content>
             </mat-card>
+            
         </div>
 
-        <!-- Layout de Creación y Lista -->
         <div class="content-row">
 
-            <!-- Sección de Acciones (Antes era el form directo) -->
             <section class="actions-section">
-                <button mat-raised-button color="primary" (click)="openAddClientModal()">
+                <button mat-raised-button color="primary" (click)="openAddClientModal()" [disabled]="state.loading">
                     + Crear Nuevo Cliente
                 </button>
             </section>
 
-            <!-- Componente Presentacional: Lista -->
             <section class="list-section">
+                <div class="loading-shade" *ngIf="state.loading">
+                    <mat-spinner diameter="40"></mat-spinner>
+                </div>
+                
                 <app-client-list [clients]="state.clients"></app-client-list>
             </section>
 

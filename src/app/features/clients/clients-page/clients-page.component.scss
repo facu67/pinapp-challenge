@@ -1,40 +1,87 @@
 .dashboard-container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
+.header-actions {
+    text-align: right;
+    padding-bottom: 1rem;
 }
 
 .metrics-row {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 
-  mat-card {
-    flex: 1;
-    text-align: center;
+    mat-card {
+        flex: 1;
+    }
+}
+
+.card-content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    margin-top: 1rem;
     
     h2 {
-      margin: 0;
-      font-size: 2rem;
-      color: #3f51b5;
+        margin: 0;
+        font-size: 2.2rem;
+        font-weight: 500;
+        color: #333;
     }
-  }
 }
 
 .content-row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
-  .actions-section {
+.actions-section {
     display: flex;
     justify-content: end;
-  }
+}
+
+.list-section {
+    position: relative;
+    min-height: 300px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.65);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    color: #f44336;
+    text-align: center;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    p {
+        font-size: 1.2rem;
+        color: #555;
+    }
 }

@@ -2,3 +2,17 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* SnackBar de Éxito */
+.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50; 
+  --mdc-snackbar-supporting-text-color: #ffffff; 
+  --mat-mdc-snack-bar-button-color: #ffffff; 
+}
+
+/* SnackBar de Error */
+.error-snackbar {
+  --mdc-snackbar-container-color: #f44336; 
+  --mdc-snackbar-supporting-text-color: #ffffff; 
+  --mat-mdc-snack-bar-button-color: #ffffff; 
+}

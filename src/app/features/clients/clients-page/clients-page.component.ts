@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ClientsState } from 'src/app/core/models/client.model';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ClientsService } from 'src/app/core/services/clients.service';
@@ -15,6 +16,7 @@ import { ClientFormComponent } from '../components/client-form/client-form.compo
 import { MatNativeDateModule } from '@angular/material/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-clients-page',
@@ -27,6 +29,7 @@ import { Router } from '@angular/router';
     MatDialogModule,
     MatButtonModule,
     MatNativeDateModule,
+    MatProgressBarModule,
   ],
   templateUrl: './clients-page.component.html',
   styleUrls: ['./clients-page.component.scss'],
@@ -47,6 +50,7 @@ export class ClientsPageComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -110,9 +114,11 @@ export class ClientsPageComponent implements OnInit {
         this.clientsService
           .addClient(result)
           .then(() => {
+            this.notificationService.showSuccess('Cliente guardado con éxito');
             console.log('Cliente guardado con éxito en Firestore');
           })
           .catch((error) => {
+            this.notificationService.showError('Ocurrió un error al guardar el cliente. Intentá de nuevo.');
             console.error('Error al guardar el cliente:', error);
             this.updateState({
               loading: false,
