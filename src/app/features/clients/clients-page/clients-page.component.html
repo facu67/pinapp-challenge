@@ -1,0 +1,51 @@
+<ng-container *ngIf="state$ | async as state">
+
+    <!-- Spinner de carga -->
+    <div *ngIf="state.loading" class="loading-container">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="dashboard-container" *ngIf="!state.loading">
+        <div style="text-align: right; padding: 1rem;">
+            <button mat-button color="warn" (click)="logout()">Cerrar Sesión</button>
+        </div>
+        <!-- Sección de Análisis de Datos -->
+        <div class="metrics-row">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Promedio de Edad</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h2>{{ state.averageAge }} años</h2>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Desviación Estándar</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h2>{{ state.standardDeviation }}</h2>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- Layout de Creación y Lista -->
+        <div class="content-row">
+
+            <!-- Sección de Acciones (Antes era el form directo) -->
+            <section class="actions-section">
+                <button mat-raised-button color="primary" (click)="openAddClientModal()">
+                    + Crear Nuevo Cliente
+                </button>
+            </section>
+
+            <!-- Componente Presentacional: Lista -->
+            <section class="list-section">
+                <app-client-list [clients]="state.clients"></app-client-list>
+            </section>
+
+        </div>
+    </div>
+
+</ng-container>

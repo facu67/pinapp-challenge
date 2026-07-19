@@ -1,0 +1,23 @@
+.list-container {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-cell[colspan="4"] {
+  text-align: center;
+  padding: 2rem;
+  color: #757575;
+}
