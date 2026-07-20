@@ -5,8 +5,17 @@
 }
 
 .header-actions {
-    text-align: right;
-    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #333;
 }
 
 .metrics-row {

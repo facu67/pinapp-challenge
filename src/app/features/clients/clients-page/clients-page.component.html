@@ -6,9 +6,13 @@
     </div>
 
     <div class="dashboard-container" *ngIf="!state.error">
-        
         <div class="header-actions">
-            <button mat-button color="warn" (click)="logout()">Cerrar Sesión</button>
+            <h1 class="page-title">Gestión de Clientes</h1>
+            
+            <button mat-button color="warn" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Cerrar Sesión
+            </button>
         </div>
 
         <div class="metrics-row">

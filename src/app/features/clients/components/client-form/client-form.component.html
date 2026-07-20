@@ -30,10 +30,14 @@
       <mat-error *ngIf="clientForm.get('birthDate')?.hasError('required')">La fecha es obligatoria.</mat-error>
     </mat-form-field>
 
+    <mat-error class="global-error" *ngIf="clientForm.hasError('ageMismatch') && (clientForm.get('age')?.dirty || clientForm.get('birthDate')?.dirty)">La edad ingresada no coincide con la fecha de nacimiento.</mat-error>
+    <!-- <div class="global-error" *ngIf="clientForm.hasError('ageMismatch') && (clientForm.get('age')?.dirty || clientForm.get('birthDate')?.dirty)">
+      La edad ingresada no coincide con la fecha de nacimiento.
+    </div> -->
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Guardar Cliente</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="clientForm.invalid">Guardar Cliente</button>
 </mat-dialog-actions>

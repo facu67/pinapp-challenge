@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ageConsistencyValidator } from 'src/app/shared/validators/age-consistency.validator';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -38,9 +39,9 @@ export class ClientFormComponent {
   clientForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     lastName: ['', [Validators.required, Validators.minLength(2)]],
-    age: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
+    age: ['', [Validators.required, Validators.min(0)]],
     birthDate: ['', Validators.required],
-  });
+  }, { validators: ageConsistencyValidator });
 
   /**
    * Cierra el modal sin guardar datos

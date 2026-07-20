@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-clients-page',
@@ -30,6 +31,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
     MatButtonModule,
     MatNativeDateModule,
     MatProgressBarModule,
+    MatIconModule
   ],
   templateUrl: './clients-page.component.html',
   styleUrls: ['./clients-page.component.scss'],
