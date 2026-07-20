@@ -31,9 +31,6 @@
     </mat-form-field>
 
     <mat-error class="global-error" *ngIf="clientForm.hasError('ageMismatch') && (clientForm.get('age')?.dirty || clientForm.get('birthDate')?.dirty)">La edad ingresada no coincide con la fecha de nacimiento.</mat-error>
-    <!-- <div class="global-error" *ngIf="clientForm.hasError('ageMismatch') && (clientForm.get('age')?.dirty || clientForm.get('birthDate')?.dirty)">
-      La edad ingresada no coincide con la fecha de nacimiento.
-    </div> -->
   </form>
 </mat-dialog-content>
 
