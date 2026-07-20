@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ClientsService } from 'src/app/core/services/clients.service';
 import { tap } from 'rxjs/internal/operators/tap';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { EMPTY } from 'rxjs/internal/observable/empty';
 import { ClientListComponent } from '../components/client-list/client-list.component';
 import { ClientFormComponent } from '../components/client-form/client-form.component';
@@ -18,6 +19,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { MatIconModule } from '@angular/material/icon';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-clients-page',
@@ -36,7 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './clients-page.component.html',
   styleUrls: ['./clients-page.component.scss'],
 })
-export class ClientsPageComponent implements OnInit {
+export class ClientsPageComponent implements OnInit, OnDestroy {
   private state = new BehaviorSubject<ClientsState>({
     clients: [],
     loading: false,
@@ -46,6 +48,7 @@ export class ClientsPageComponent implements OnInit {
   });
 
   state$ = this.state.asObservable();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private clientsService: ClientsService,
@@ -88,6 +91,7 @@ export class ClientsPageComponent implements OnInit {
           });
           return EMPTY;
         }),
+        takeUntil(this.destroy$),
       )
       .subscribe();
   }
@@ -135,5 +139,10 @@ export class ClientsPageComponent implements OnInit {
     this.authService.logout().then(() => {
       this.router.navigate(['/login']);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
